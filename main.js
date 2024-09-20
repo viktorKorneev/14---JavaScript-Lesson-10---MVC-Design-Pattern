@@ -15,7 +15,17 @@ const model = {
     view.renderTasks(model.tasks); // Обновляем представление
   },
   deleteTask() {},
-  toggleTask() {},
+  toggleTask(taskId) {
+    // воспользуемся методом map
+    this.tasks = this.tasks.map((task) => {
+      if (task.id === taskId) {
+        task.isDone = !task.isDone;
+      }
+      return task;
+    });
+
+    view.renderTasks(model.tasks); // Обновляем представление
+  },
 };
 
 // отображение данных: рендер списка задач, размещение обработчиков событий
@@ -36,6 +46,17 @@ const view = {
 
       input.value = ""; // Очищаем поле ввода
     });
+    const list = document.querySelector(".list");
+    list.addEventListener('click', function (event) {
+ 
+      // проверяем, что кликнули на название задачи
+      if (event.target.classList.contains('task-title')) {
+        // id задачи хранится в id родительского элемента
+        // +, используем унарный плюс для преобразования типа в number
+        const taskId = +event.target.parentElement.id
+        controller.toggleTask(taskId)
+      }
+    })
   },
   renderTasks(tasks) {
     let list = document.querySelector(".list");
@@ -66,7 +87,9 @@ const controller = {
     }
   },
   deleteTask() {},
-  toggleTask() {},
+  toggleTask(id) {
+    model.toggleTask(id)
+  },
 };
 
 function viewDefault() {
