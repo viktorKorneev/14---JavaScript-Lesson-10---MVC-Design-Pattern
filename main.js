@@ -61,7 +61,9 @@ const controller = {
     return model.tasks;
   },
   addTask(title) {
-    model.addTask(title);
+    if (title.trim() !== "") {
+      model.addTask(title);
+    }
   },
   deleteTask() {},
   toggleTask() {},
