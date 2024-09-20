@@ -30,6 +30,10 @@ const model = {
 
     view.renderTasks(model.tasks); // Обновляем представление
   },
+  clearTasks() {
+    this.tasks = this.tasks.filter((task) => !task.isDone) 
+    view.renderTasks(model.tasks)
+  }
 };
 
 // отображение данных: рендер списка задач, размещение обработчиков событий
@@ -65,6 +69,10 @@ const view = {
         controller.deleteTask(taskId);
       }
     });
+    const clearButton = document.querySelector(".clear");
+    list.addEventListener("click", function (event) {
+      controller.clearTasks()
+    })
   },
   renderTasks(tasks) {
     let list = document.querySelector(".list");
@@ -100,6 +108,9 @@ const controller = {
   toggleTask(id) {
     model.toggleTask(id);
   },
+  clearTasks() {
+    model.clearTasks()
+  }
 };
 
 function viewDefault() {
