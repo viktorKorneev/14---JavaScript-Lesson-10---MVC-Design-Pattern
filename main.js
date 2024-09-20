@@ -13,12 +13,20 @@ const model = {
 
 // отображение данных: рендер списка задач, размещение обработчиков событий
 const view = {
+  init() {
+    const tasks = controller.getTasks();
+    this.renderTasks(tasks);
+  },
   renderTasks(tasks) {
     let list = document.querySelector(".list");
-    const tasksHTML = "";
+    let tasksHTML = "";
     for (let i = 0; i < tasks.length; i++) {
       const task = tasks[i];
-      tasksHTML += `<li><span>${task.title}</span><button>Удалить</button></li>`;
+      tasksHTML = tasksHTML + `
+      <li>
+        <span>${task.title}</span>
+        <button>Удалить</button>
+      </li>`;
       list.innerHTML = tasksHTML;
     }
   },
@@ -26,7 +34,15 @@ const view = {
 
 // обработка действий пользователя, обновление модели
 const controller = {
+  getTasks() {
+    return model.tasks;
+  },
   addTask() {},
   deleteTask() {},
   toggleTask() {},
 };
+
+function viewDefault() {
+  view.init();
+}
+viewDefault();
