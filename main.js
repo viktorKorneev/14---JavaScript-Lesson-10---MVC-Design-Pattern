@@ -1,8 +1,19 @@
 // хранение данных, бизнес-логика
-const model = {}
+const model = {
+    tasks: [],
+    addTask(){},
+    deleteTask(){},
+    toggleTask(){}
+}
  
 // отображение данных: рендер списка задач, размещение обработчиков событий
-const view = {}
+const view = {
+    render(){}
+}
  
 // обработка действий пользователя, обновление модели
-const controller = {}
+const controller = {
+    addTask(){},
+    deleteTask(){},
+    toggleTask(){}
+}
